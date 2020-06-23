@@ -21,15 +21,19 @@ Toolkit.run(async tools => {
     return
   }
 
-  let version;
+  let version
+  tools.outputs.update = 'true'
   if (messages.map(message => message.includes('patch')).includes(true)) {
-    version = 'patch'
+    version = 'patch';
+    Toolkit.
   } else if (messages.map(message => message.includes('major')).includes(true)) {
     version = 'major'
   } else if (messages.map(message => message.toLowerCase().includes('minor')).includes(true)) {
     version = 'minor'
   } else {
-    return
+    tools.outputs.update = 'false'
+    tools.exit.success('Commits with changes version not found')
+    exit
   }
 
   try {
