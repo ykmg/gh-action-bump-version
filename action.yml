@@ -15,3 +15,6 @@ inputs:
     description: 'Custom dir to the package'
     default: ''
     required: false
+outputs:
+  update:
+    description: Whether the version has update in the examined commits
