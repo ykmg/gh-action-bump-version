@@ -12,11 +12,8 @@ Toolkit.run(async tools => {
   const pkg = tools.getPackageJSON()
   const event = tools.context.payload
 
-  const messages = event.commits.map(commit => commit.message + '\n' + commit.body)
-
   const commitMessage = 'version bump to'
-  const isVersionBump = messages.map(message => message.toLowerCase().includes(commitMessage)).includes(true)
-  if (isVersionBump || !process.env.VERSION_COMMAND || process.env.VERSION_COMMAND === '' || process.env.VERSION_COMMAND === 'none') {
+  if (!process.env.VERSION_COMMAND || process.env.VERSION_COMMAND === '' || process.env.VERSION_COMMAND === 'none') {
     tools.exit.success('No action necessary!')
     return
   }
