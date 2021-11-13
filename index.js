@@ -54,7 +54,7 @@ Toolkit.run(async tools => {
       ['version', '--allow-same-version=true', '--git-tag-version=false', current])
     console.log('current:', current, '/', 'version:', version)
     newVersion = execSync(`npm version --git-tag-version=false ${version}`).toString().trim()
-    newVersion = `${process.env['INPUT_TAG-PREFIX']}${newVersion}`
+    newVersion = `${process.env['INPUT_TAG-PREFIX'] ? process.env['INPUT_TAG-PREFIX'] :""}${newVersion}`
     console.log('new version:', newVersion)
     try {
       // to support "actions/checkout@v1"
@@ -66,7 +66,7 @@ Toolkit.run(async tools => {
 
     const remoteRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`
     // console.log(Buffer.from(remoteRepo).toString('base64'))
-    await tools.exec('git', ['tag', newVersion])
+    await tools.exec('git', ['tag', newVersion.replace("undefined","")])
     await tools.exec('git', ['push', remoteRepo, '--follow-tags'])
     await tools.exec('git', ['push', remoteRepo, '--tags'])
   } catch (e) {
