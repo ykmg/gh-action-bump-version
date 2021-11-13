@@ -16,18 +16,18 @@ Toolkit.run(async tools => {
 
   const commitMessage = 'version bump to'
   const isVersionBump = messages.map(message => message.toLowerCase().includes(commitMessage)).includes(true)
-  if (isVersionBump) {
+  if (isVersionBump || !process.env.VERSION_COMMAND || process.env.VERSION_COMMAND === '' || process.env.VERSION_COMMAND === 'none') {
     tools.exit.success('No action necessary!')
     return
   }
 
-  let version
+  let version = process.env.VERSION_COMMAND
   tools.outputs.update = 'true'
-  if (messages.map(message => message.includes('patch')).includes(true)) {
+  if (process.env.VERSION_COMMAND.includes('patch')) {
     version = 'patch'
-  } else if (messages.map(message => message.includes('major')).includes(true)) {
+  } else if (process.env.VERSION_COMMAND.includes('major')) {
     version = 'major'
-  } else if (messages.map(message => message.toLowerCase().includes('minor')).includes(true)) {
+  } else if (process.env.VERSION_COMMAND.includes('minor')) {
     version = 'minor'
   } else {
     tools.outputs.update = 'false'

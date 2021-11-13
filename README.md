@@ -15,8 +15,8 @@ Make sure you use the `actions/checkout@v2` action!
 
 ### Workflow
 
-* Based on the commit messages, increment the version from the latest release.
-  * If the string "major" is found anywhere in any of the commit messages or descriptions the major 
+* Based on the input VERSION_COMMAND, increment the version from the latest release.
+  * If the string "major" is found in VERSION_COMMAND the major 
     version will be incremented.
   * If includes "minor" then the minor version will be increased.
   * If includes "patch" then the patch version will be increased.
@@ -38,3 +38,12 @@ Make sure you use the `actions/checkout@v2` action!
   env:
     PACKAGEJSON_DIR:  'frontend'
 ```
+**VERSION_COMMAND:** Param to trigger the version bump. (can be none, minor, patch or major)  Example:
+```yaml
+- name:  'Automated Version Bump'
+  uses:  ''
+  env:
+    VERSION_COMMAND:  'major'
+```
+
+
