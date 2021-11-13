@@ -19,7 +19,7 @@ Toolkit.run(async tools => {
   }
 
   let version = process.env.VERSION_COMMAND
-  tools.outputs.update = 'true'
+  
   if (process.env.VERSION_COMMAND.includes('patch')) {
     version = 'patch'
   } else if (process.env.VERSION_COMMAND.includes('major')) {
@@ -27,7 +27,6 @@ Toolkit.run(async tools => {
   } else if (process.env.VERSION_COMMAND.includes('minor')) {
     version = 'minor'
   } else {
-    tools.outputs.update = 'false'
     tools.exit.success('Commits with changes version not found')
     exit
   }
