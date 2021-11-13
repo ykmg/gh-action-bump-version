@@ -14,7 +14,7 @@ inputs:
   VERSION_COMMAND:
     description: 'Input for deciding what version to iterate'
     default: ''
-    required: false
+    required: true
   PACKAGEJSON_DIR:
     description: 'Custom dir to the package'
     default: ''
